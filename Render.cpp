@@ -5690,6 +5690,7 @@ void DoiMatKhau() {
     BG_HopThoai(0, 0, 1260, 150, screen);
     TTF_Font* font = TTF_OpenFont("Nguyen.ttf", 40);
     TTF_Font* font_h1 = TTF_OpenFont("Mali-Light.ttf", 25);
+    TTF_Font* font_h3 = TTF_OpenFont("Mali-Light.ttf", 15);
     TTF_Font* font_h2 = TTF_OpenFont("Mali-Light.ttf", 40);
     SDL_Surface* image = IMG_Load("admin.png");
     SDL_Surface* home = IMG_Load("home.png");
@@ -5709,6 +5710,8 @@ void DoiMatKhau() {
     SDL_Color textColor = { 0,0,0 }; // đen
     SDL_Color textColor_W = { 255,255,255 }; // trắng
     SDL_Color textColor_RED = { 255 , 0 , 0 }; // đỏ
+    Admin* dsAd = getfromfileAdmin("Admin.txt");
+    Admin AD = getad(IDAdmin, dsAd, size_admin);
     // ve ki tu
     Text(150, 20, "Quan ly he thong dang ki tin chi ", screen, font, textColor);
     Text(150, 80, "Dai hoc Bach Khoa - Dai hoc Da Nang ", screen, font, textColor);
@@ -5744,7 +5747,20 @@ void DoiMatKhau() {
     Image(20, 525, help, screen);
     BG_HopThoai(0, 550, 270, 110, screen);
     BG_HopThoai(280, 160, 970, 490, screen);
+    //
+    Text(580, 200, "DOI MAT KHAU", screen, font_h2, textColor);
+    HopThoai(600, 270, 400, 50, screen);
+    HopThoai(600, 350, 400, 50, screen);
+    HopThoai(650, 420, 300, 50, screen);
+    Text(330, 270, "Nhap mat khau cu : ", screen, font_h1, textColor);
+    Text(330, 350, "Nhap mat khau moi : ", screen, font_h1, textColor);
+    Text(700, 420, "Xac nhan ", screen, font, textColor_RED);
     SDL_Flip(screen);
+    char mk_cu[20] = "";
+    char hide_mk_cu[20] = "";
+    char mk_moi[20] = "";
+    char hide_mk_moi[20] = "";
+    char hide = '*';
     bool quit = false;
     SDL_Event event;
     while (!quit) {
@@ -5757,6 +5773,124 @@ void DoiMatKhau() {
                     int x = event.button.x;
                     int y = event.button.y;
                     std::cout << x << " " << y << endl;
+                    if (x > 600 && y > 270 && x < 1000 && y < 320) {
+                        while (!quit) {
+                            int br = 0;
+                            while (SDL_PollEvent(&event)) {
+                                if (event.type == SDL_KEYDOWN) {
+                                    if (event.key.keysym.sym == SDLK_ESCAPE) {
+                                        quit = true;
+                                    }
+                                    else if (event.key.keysym.sym == SDLK_RETURN) {
+                                        br = 1;
+                                    }
+                                    else if (event.key.keysym.sym == SDLK_BACKSPACE) {
+                                        int length = strlen(mk_cu);
+                                        if (length > 0) {
+                                            mk_cu[length - 1] = '\0';
+                                            hide_mk_cu[length - 1] = '\0';
+                                        }
+                                        HopThoai(600, 270, 400, 50, screen); // set lại hộp thoại
+                                    }
+                                    else if (event.key.keysym.sym != SDLK_RSHIFT && event.key.keysym.sym != SDLK_LSHIFT && event.key.keysym.sym != SDLK_CAPSLOCK && event.key.keysym.sym != SDLK_LCTRL && event.key.keysym.sym != SDLK_RCTRL && event.key.keysym.sym != SDLK_LALT && event.key.keysym.sym != SDLK_RALT && event.key.keysym.sym != SDLK_UP && event.key.keysym.sym != SDLK_DOWN && event.key.keysym.sym != SDLK_LEFT && event.key.keysym.sym != SDLK_RIGHT) {
+                                        char keyPressed = (char)event.key.keysym.sym;
+                                        if ((keyPressed >= '0' && keyPressed <= '9') || (keyPressed >= 'a' && keyPressed <= 'z')) {
+                                            strncat(mk_cu, &keyPressed, 1);
+                                            strncat(hide_mk_cu, &hide, 1);
+                                        }
+                                        if (event.key.keysym.sym == SDLK_BACKSPACE) {
+                                            int length = strlen(mk_cu);
+                                            if (length > 0) {
+                                                mk_cu[length - 1] = '\0';
+                                                hide_mk_cu[length - 1] = '\0';
+                                            }
+                                            HopThoai(600, 270, 400, 50, screen);
+                                        }
+                                    }
+                                }
+                            }
+                            if (font != NULL) {
+                                SDL_Rect textRect;
+                                textRect.x = 610;
+                                textRect.y = 275;
+                                SDL_Surface* textSurface = TTF_RenderText_Solid(font, hide_mk_cu, textColor);
+                                SDL_BlitSurface(textSurface, NULL, screen, &textRect);
+                            }
+                            SDL_Flip(screen); // Cập nhật cửa sổ
+                            if (br == 1) break;
+                        }
+                    }
+                    if (x > 600 && y > 350 && x < 1000 && y < 400) {
+                        while (!quit) {
+                            int br = 0;
+                            while (SDL_PollEvent(&event)) {
+                                if (event.type == SDL_KEYDOWN) {
+                                    if (event.key.keysym.sym == SDLK_ESCAPE) {
+                                        quit = true;
+                                    }
+                                    else if (event.key.keysym.sym == SDLK_RETURN) {
+                                        br = 1;
+                                    }
+                                    else if (event.key.keysym.sym == SDLK_BACKSPACE) {
+                                        int length = strlen(mk_moi);
+                                        if (length > 0) {
+                                            mk_moi[length - 1] = '\0';
+                                            hide_mk_moi[length - 1] = '\0';
+                                        }
+                                        HopThoai(600, 350, 400, 50, screen); // set lại hộp thoại
+                                    }
+                                    else if (event.key.keysym.sym != SDLK_RSHIFT && event.key.keysym.sym != SDLK_LSHIFT && event.key.keysym.sym != SDLK_CAPSLOCK && event.key.keysym.sym != SDLK_LCTRL && event.key.keysym.sym != SDLK_RCTRL && event.key.keysym.sym != SDLK_LALT && event.key.keysym.sym != SDLK_RALT && event.key.keysym.sym != SDLK_UP && event.key.keysym.sym != SDLK_DOWN && event.key.keysym.sym != SDLK_LEFT && event.key.keysym.sym != SDLK_RIGHT) {
+                                        char keyPressed = (char)event.key.keysym.sym;
+                                        if ((keyPressed >= '0' && keyPressed <= '9') || (keyPressed >= 'a' && keyPressed <= 'z')) {
+                                            strncat(mk_moi, &keyPressed, 1);
+                                            strncat(hide_mk_moi, &hide, 1);
+                                        }
+                                        if (event.key.keysym.sym == SDLK_BACKSPACE) {
+                                            int length = strlen(mk_moi);
+                                            if (length > 0) {
+                                                mk_moi[length - 1] = '\0';
+                                                hide_mk_moi[length - 1] = '\0';
+                                            }
+                                            HopThoai(600, 350, 400, 50, screen);
+                                        }
+                                    }
+                                }
+                            }
+                            if (font != NULL) {
+                                SDL_Rect textRect;
+                                textRect.x = 610;
+                                textRect.y = 355;
+                                SDL_Surface* textSurface = TTF_RenderText_Solid(font, hide_mk_moi, textColor);
+                                SDL_BlitSurface(textSurface, NULL, screen, &textRect);
+                            }
+                            SDL_Flip(screen); // Cập nhật cửa sổ
+                            if (br == 1) break;
+                        }
+                    }
+                    if (x > 650 && y > 420 && x < 950 && y < 470) {
+                        char title1[] = "Sai mat khau";
+                        char title3[] = "Doi mat khau thanh cong";
+                        char title2[] = "";
+                        if (strcmp(mk_cu, AD.getmk()) != 0) Alert(title1, title2, "Sai mat khau");
+                        else {
+                            ofstream o;
+                            o.open("Admin.txt", ios::trunc);
+                            for (int i = 0; i < size_admin; i++) {
+                                if (strcmp(dsAd[i].getIdAdmin(), IDAdmin) == 0)
+                                {
+                                    o << IDAdmin << endl;
+                                    o << mk_moi << endl;
+                                }
+                                else {
+                                    o << dsAd[i].getIdAdmin() << endl;
+                                    o << dsAd[i].getmk() << endl;
+                                }
+                            }
+                            o.close();
+                            Alert(title3, title2, "Doi mat khau thanh cong");
+                            DoiMatKhau();
+                        }
+                    }
                     if (x > 20 && x < 100 && y > 55 && y < 95) {
                         DangNhapAdmin();
                     }
@@ -6866,6 +7000,6 @@ int main(int argc, char* argv[]) {
         return 1;
     }
     // kiểm ra thư viện
-    Help();
+    DoiMatKhau();
     return 0;
 }

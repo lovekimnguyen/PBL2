@@ -1,13 +1,14 @@
 ﻿#include "Func.h"
 unsigned int size_dslhp_sv = 0;
 unsigned int size_dslhp = 0;
-unsigned int size_dshp = 10;
-unsigned int size_dssv =3;
+unsigned int size_dshp = 0;
+unsigned int size_dssv =0;
 unsigned int size_dsgv=0;
 unsigned int size_dsnhom = 0;
 unsigned int size_user = 0;
 unsigned int size_admin = 0;
  User* getfromfileUsers(const string namefile) {
+	 size_user = 0;
 	 ifstream in;
 	 in.open(namefile);
 	 User* us = new User[1000];
@@ -25,6 +26,7 @@ unsigned int size_admin = 0;
 	 return us;
  }
  Admin* getfromfileAdmin(const string namefile) {
+	 size_admin = 0;
 	 ifstream in;
 	 in.open(namefile);
 	 Admin* ad = new Admin[1000];
