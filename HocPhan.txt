@@ -1,0 +1,33 @@
+mahp1
+Nguyen Ly HDH
+2.5
+mahp2
+Co so du lieu
+2
+mahp3
+Phap Luat Dai Cuong
+2
+mahp4
+Kinh Te Chinh Tri
+2
+mahp5
+Lap Trinh Huong Doi Tuong
+2.5
+mahp7
+PT & TK Thuat Toan
+2
+mahp8
+Nhap Mon Nganh
+2
+mahp9
+Ki Thuat Lap Trinh
+2
+mahp10
+Giai Tich 1
+5
+mahp11
+Nguyen Li Ke Toan
+4
+mahp12
+Yeu Kim Nguyen
+10
