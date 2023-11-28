@@ -1,0 +1,473 @@
+p {
+    color : rgb(6, 0, 0) ;
+    font-size: 15px;
+
+}
+h1 {
+    color: var(--text-color);
+}
+#first {
+    color:rgb(230, 94, 20);
+}
+.object {
+    color: aqua;
+}
+:root {
+    --text-color : green ;
+}
+.image {
+    max-width: 100px;
+    height: auto;
+}
+.boxx {
+    max-width: 100%;
+    height: auto ;
+    padding: 200px;
+    box-sizing: border-box;
+    border: 10px dashed gold;
+    background-clip: padding-box;
+    background-image: linear-gradient(0 , rgba(219, 219, 181, 0.5) , rgba(128, 128, 160, 0.5)) ,
+    url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAIPIE9c6ROm2Yo93YtY8EIbgXyxdp_xL_cA&usqp=CAU);
+    background-size: 100px ;
+    position: relative;
+
+}
+h1:hover {
+    color: rgb(202, 34, 34);
+}
+.box:hover{
+    background-color: rgb(71, 232, 8);
+}
+a:link {
+    color: red;
+ }
+ a:visited {
+    color: green;
+ }
+ a:hover {
+    color: yellow;
+ }
+ a:active {
+    color: blue;
+ }
+button:active {
+    color: rgb(213, 23, 159);
+}
+option:active {
+    color: rgb(80, 75, 142);
+    background-color: rgb(230, 94, 20);
+}
+input:checked {
+    width: 20px;
+    height: 20px;
+}
+input:enabled {
+    background: rgb(243, 241, 241);
+    color: rgb(16, 16, 1);
+}
+ 
+p:empty {
+    color: rgb(224, 18, 36);
+    width: 100px;
+    height: 10px;
+    color: #000;
+  }
+input:required {
+    background-color: rgb(176, 209, 136);
+    color:rgba(216, 24, 24, 0.5);
+}
+input:optional {
+    background-color: beige;
+}
+table, th, td {
+    border: 1px solid;
+  }
+table {
+    width: 80%;
+    background-color: white;
+}
+th {
+    height: 50px;
+}
+td {
+    height: 30px;
+    text-align: center;
+}
+td , td {
+    padding: 15px;
+}
+tr:hover {
+    color: red;
+    background-color: rgb(191, 234, 220);
+}
+tr:nth-child(even) {
+    background-color: #f2f2f2 ;
+}
+th {
+    background-color: green;
+    color: white;
+}
+input:disabled {
+    background: gray;
+  }
+.box {
+    width: 200px;
+    height: 200px;
+    color:#fff;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    box-sizing: border-box;
+    border: dashed green;
+    background-clip: padding-box;
+}
+.box1 {
+    background-color: blue;  
+    font-size: 50px;
+    padding: 10px 10px 10px 10px;
+    border: 10px solid #333;
+}
+.box2 {
+    background-color: brown;
+    font-size: 50px;
+}
+.header {
+    width: 100px;
+    height: 100px;
+    background-color: #333;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 2px dashed red;
+    background-clip: content-box;
+}
+option:hover {
+    color: red;
+}
+h1::first-letter {
+    font-size: 50px;
+    color: rgb(0, 255, 98);
+}
+::selection {
+    background-color: burlywood;
+    color: #2c0404;
+}
+li::selection {
+    background-color: green;
+    color: #fff;
+}
+::marker {
+    color: rgb(35, 215, 173);
+    font-size: 20px;
+}
+#isNot {
+    max-width: 200px;
+    height: auto;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    position: fixed;
+    color: red;
+}
+.father {
+    height: 170px;
+    width: 800px;
+    position: absolute;
+    background-color: rgba(255,255,255,0.5);
+    left:380px;
+    top : 0 ;
+}
+#header {
+    font-size: 30px;
+    text-align: center;
+}
+#ticky {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 20px;
+    margin-top: 40px;
+    background-color: #f2f2f2;
+    left: 0;
+    right: 0;
+    height: 30px;
+}
+.boxx1 {
+    min-height: 42px;
+    background-color: rgb(163, 64, 28);
+    display: flex;
+    justify-content: space-between;
+}
+.box1_list {
+    padding-left: 0;
+    margin: auto 16px;
+}
+.istem {
+    color: #fff;
+    list-style: none;
+    margin: 0 8px;
+    display: inline-block;
+}
+.boxx2 {
+    width: 100%;
+    height: 180px;
+    padding: 20px ;
+    background-color: #f2f2f2;
+    background-clip: content-box;
+    border: 20px dashed white ;
+    box-sizing: border-box;
+    margin: 36px auto 0 auto;
+}
+.form__label {
+    padding: 12px 0;
+    display : flex;
+}
+.form__label1 {
+    min-width: 120px;
+}
+.form__label2 {
+    flex: 1;
+}
+.none {
+    list-style: none;
+}
+.boxx3 {
+    max-width: 100%;
+    height: auto;
+    background-color: white;
+    display: flex;
+    margin-top: 20px;
+    padding: 12px;
+}
+.boxx31 {
+    padding: 0 16px;
+}
+.one {
+    flex: 1;
+}
+.two {
+    flex: 1;
+}
+.main {
+    flex: 3;
+}
+.line {
+    width: 100%;
+    height: 20px;
+    background-color: #f2f2f2;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-clip: content-box;
+}
+.boxx4 {
+    max-width: 100%;
+    height: auto;
+    background-color: #ccbbbb;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    box-sizing: border-box;
+    color: #f7f8f6;
+    display: flex;
+    flex-direction: column;
+}
+@media (min-width : 700px) {
+    .boxx4 {
+        flex-direction: row;
+    }
+}
+.one4 {
+    background-color: rgb(60, 142, 142);
+    flex: 1;
+    color: #f7f8f6;
+    margin: 15px;
+    padding: 5px;
+}
+.two4 {
+    background-color: rgb(122, 108, 91);
+    flex: 1;
+    color: #f7f8f6;
+    margin: 15px;
+    padding: 5px;
+}
+.three4 {
+    background-color: rgb(156, 156, 105);
+    flex: 1;
+    color: #f7f8f6;
+    margin: 15px;
+    padding: 5px;
+}
+.boxx5 {
+    margin-top: 36px;
+    margin-bottom: 36px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap-reverse;
+}
+.square {
+    background-color: red;
+    color: white;
+    font-size: 50px;
+    height: 100px;
+    flex-basis: 18%;
+    text-align: center;
+    line-height: 90px;
+    margin-top: 20px;
+}
+.boxx6 {
+    height: 800px;
+    background-color: #ccbbbb;
+    display: flex;
+}
+.boxx61 {
+    margin: auto;
+    background-color: aquamarine;
+    height: 600px;
+    width: 60%;
+    display: flex;
+}
+#center {
+    margin: auto;
+    font-size: 60px;
+    font-weight: 700;
+}
+.boxx7 {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    display: flex;
+    background-color: #fff;
+    height: 360px;
+    justify-content: space-around;
+}
+.boxx71 {
+    align-self: flex-end;
+    width: 60px;
+    color: #fff;
+    text-align: center;
+    height: var(--percent);
+    background-color: red;
+    animation: animation ease-in-out 0.7s;
+}
+@keyframes animation { 
+    from {
+        opacity: 0.5;
+        height: calc(var(--percent) - 50%);
+    }
+    to {
+        opacity: 1;
+        height: var(--percent);
+    }
+}
+.video-play {
+    max-width: 100%;
+    height: auto;
+    position: relative;
+    padding-bottom: 50px;
+}
+.noidung {
+    position: absolute;
+    top: 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: #f1f1f1;
+    width: 100%;
+    padding: 20px;
+    height: 100vh;
+    display: flex;
+    justify-content: space-around;
+}
+.noidung1 {
+    flex: 1;
+    padding-top: 100px;
+    padding-left: 50px;
+}
+#video {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+}
+#myBtn {
+    width: 200px;
+    font-size: 18px;
+    padding: 10px;
+    border: none;
+    background: #000;
+    color: #fff;
+    cursor: pointer;
+}
+#myBtn:hover {
+    background: #ddd;
+    color: black;
+  }
+.loi_hat {
+    color: rgb(184, 50, 50);
+}
+.title-content {
+    max-width: 100%;
+    position: absolute;
+    top: 0;
+    left: 350px;
+    color: red;
+    font-size: 30px;
+}
+.title-table {
+    font-size: 20px;
+}
+#dayss {
+    width: 150px;
+    font-size: 18px;
+    padding: 10px;
+    border: none;
+    background: #000;
+    color: #fff;
+    cursor: pointer;
+}
+#hour {
+    width: 120px;
+    font-size: 15px;
+    padding: 10px;
+}
+#day {
+    width: 120px;
+    font-size: 15px;
+    padding: 10px;
+}
+#month {
+    width: 120px;
+    font-size: 15px;
+    padding: 10px;
+}
+#year {
+    width: 120px;
+    font-size: 15px;
+    padding: 10px ;
+}
+#hour1 {
+    width: 120px;
+    font-size: 15px;
+    padding: 10px;
+}
+#day1 {
+    width: 120px;
+    font-size: 15px;
+    padding: 10px;
+}
+#month1 {
+    width: 120px;
+    font-size: 15px;
+    padding: 10px;
+}
+#year1 {
+    width: 120px;
+    font-size: 15px;
+    padding: 10px;
+}
+.fixed-video {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+#video-fixed {
+    max-width: 200px;
+}
+#zzz {
+    position: absolute;
+    padding-bottom: 50px;
+    left: 400px;
+}
