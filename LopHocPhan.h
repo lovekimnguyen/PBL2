@@ -10,7 +10,7 @@ class LopHocPhan
 	char malophocphan[16]; //= mahocphan + '.' + manhom
 	char mahocphan[8];
 	char magv[7];
-	unsigned short soluongdk;
+	unsigned short soluongdk = 0;
 	unsigned short soluongmo;
 	char manhom[6];//22.12
 	pair<unsigned short, unsigned short> tuanhoc;

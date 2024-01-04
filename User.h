@@ -14,6 +14,3 @@ public:
 		strcpy_s(mk, strlen(mkk) + 1, mkk);
 	}
 };
-
-
-

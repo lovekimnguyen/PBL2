@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Lophp_SV.h"
 #include "SinhVien.h"
 #include"Admin.h"
@@ -6,6 +6,10 @@
 #include "Nhom_LopHP.h"
 #include "TKB.h"
 #include "User.h"
+#include <iostream>
+#include <iomanip>
+#include <sstream>
+#include <ctime>
 extern unsigned int size_dslhp_sv ; // so lop hp da dki
 extern unsigned int size_dslhp; // so lop hp tat ca
 extern unsigned int size_dshp; // so cac hoc phan
@@ -54,8 +58,10 @@ Nhom* getdsnhom_lhp(const string namefilenhom, LopHocPhan* ds_lhp);
 string TKBinchar(ThoiKhoaBieu tkb);
 string TuanHocinchar(pair<unsigned short, unsigned short> tuanhoc);
 string DKy(LopHocPhan hp);
-LopHocPhan* getdslhpcuahp(char* mahp, LopHocPhan* dslhp , HocPhan* dshp);
-int getsllhpcuahp(char* mahp, LopHocPhan* dslhp, HocPhan* dshp);
+LopHocPhan* getdslhpcuahp(char* mahp, LopHocPhan* dslhp, ThoiKhoaBieu* tkb_sv, unsigned int size_dstkb_sv);
+int getsllhpcuahp(char* mahp, LopHocPhan* dslhp);
 GiangVien getGV(const string namefile, char* magv);
 
 const char* getGT(bool );
+void setfilelhp(const string namefile, LopHocPhan* dslhp);
+User getUR(const string namefile, char* mssv);

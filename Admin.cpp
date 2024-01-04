@@ -25,10 +25,10 @@
 	SinhVien s(MSSV, lopsh, sotcmax, hoten, email, sdt, gioitinh);
 	ofstream o, o1;
 	time_t now = time(0);
+	SinhVien* dssv = getfromfileSinhVien(namefile);
 	char* dt = ctime(&now);
 	o1.open("LichSuThayDoi.txt", ios::app);
 	o.open(namefile, ios::trunc);
-	SinhVien* dssv = getfromfileSinhVien(namefile);
 	for (int i = 1; i <= size_dssv; i++) {
 		if (strcmp(dssv[i].getMSSV(), MSSV) == 0) {
 			dssv[i] = s;
@@ -48,6 +48,7 @@
 		}
 		o.close();
 	}
+	o1.close();
 }
  void Admin::nhapHocPhan(const string namefile, char mahocphan[], char tenhocphan[], double tchi) {
 	 ofstream o, o1;
@@ -270,9 +271,10 @@
 	 o1.close();
 
  }
- void Admin::xoaLhpSv_Bixoa_Dadk_Bymssv_infilelhpsv(const string namefilelhpsv, const string namefileSinhVien, char* mssv) {
+ void Admin::xoaLhpSv_Bixoa_Dadk_Bymssv_infilelhpsv(const string namefilelhpsv, const string namefileSinhVien, char* mssv, const string namefilelhp) {
 	 Lophp_SV* dsLophp_Sv = getfromfileLophp_SV(namefilelhpsv);
 	 SinhVien* dssv = getfromfileSinhVien(namefileSinhVien);
+	 LopHocPhan* dslhp = getfromfileLopHocPhan(namefilelhp);
 	 int d = getsv(mssv, dssv, size_dssv).getsohpdadk();
 	 Lophp_SV* t = new  Lophp_SV[size_dslhp_sv - d + 1];
 	 ofstream o;
@@ -282,6 +284,10 @@
 	 for (int i = 1; i <= size_dslhp_sv; i++) {
 		 if (strcmp(dsLophp_Sv[i].getMSSV(), mssv) == 0) {
 			 d--;
+			 for (int k = 1; k <= size_dslhp; k++) {
+				 if (strcmp(dslhp[k].getmalophocphan(), dsLophp_Sv[i].getmalophocphan()) == 0)
+					 dslhp[k].setsoluongdk(dslhp[k].getsoluongdk() - 1);
+			 }
 			 if (d == 0) break;
 		 }
 		 else t[++j] = dsLophp_Sv[i];
@@ -291,14 +297,45 @@
 	 size_dslhp_sv = j;
 	 delete[] dsLophp_Sv;
 	 delete[] dssv;
+	 setfilelhp(namefilelhp, dslhp);
 	 setfileLophp_sv(namefilelhpsv, t);
 	 o.close();
 
 
  }
- void Admin::xoaSV(const string namefileSV, const string namefileLhp_Sv, char* mssv) {
-	 xoaLhpSv_Bixoa_Dadk_Bymssv_infilelhpsv(namefileLhp_Sv, namefileSV, mssv);//xóa lhp sv đã đk
+ void Admin::xoaSV(const string namefileSV, const string namefileLhp_Sv, const string namefilelhp, char* mssv) {
+	 xoaLhpSv_Bixoa_Dadk_Bymssv_infilelhpsv(namefileLhp_Sv, namefileSV, mssv, namefilelhp);//xóa lhp sv đã đk
+	 XoaUser_ByMSSV("Users.txt", mssv);//xoa tk mk cua sv do
 	 xoasvBy_mssv_InfileSV(namefileSV, mssv);//xóa sv đó ra khỏi file sv
+ }
+ void Admin::XoaUser_ByMSSV(const string namefile, char* mssv) {
+	 User* dsuser = getfromfileUsers(namefile);
+	 ofstream o, o1;
+	 o1.open("LichSuThayDoi.txt", ios::app);
+	 for (int i = 1; i <= size_dssv; i++) {
+		 if (strcmp(dsuser[i].getMSSV(), mssv) == 0)
+		 {
+			 o.open(namefile, ios::trunc);
+			 for (int j = 1; j < i; j++)
+			 {
+				 o << dsuser[j].getMSSV() << endl;
+				 o << dsuser[j].getmk() << endl;
+
+			 }
+			 for (int j = i + 1; j <= size_dssv; j++)
+			 {
+				 o << dsuser[j].getMSSV() << endl;
+				 o << dsuser[j].getmk() << endl;
+			 }
+
+			 break;
+		 }
+	 }
+	 time_t now = time(0);
+	 char* dt = ctime(&now);
+	 o1 << "Xoa User " << mssv << " | " << "thoi gian: " << dt;
+	 o.close();
+	 o1.close();
  }
  void Admin::XoaGv_FromFileGV_ByMaGv(const string namefileGv, char* magv) {
 	 GiangVien* dsgv = getfromfileGiangVien(namefileGv);
@@ -330,18 +367,16 @@
  void Admin::xoaLhp_InfileLhp_ByMaGv(const string namefileLhp, char* magv) {
 	 LopHocPhan* dslhp = getfromfileLopHocPhan(namefileLhp);
 	 ofstream o1, o2;
-	 int j = 0;
-	 bool* kt = new bool[size_dslhp + 1];
+	 int kt[1000];
 	 for (int i = 1; i <= size_dslhp; i++)
 		 kt[i] = 1;
 	 o2.open("LichSuThayDoi.txt", ios::app);
+	 o1.open(namefileLhp, ios::trunc);
 	 time_t now = time(0);
 	 char* dt = ctime(&now);
 	 for (int i = 1; i <= size_dslhp; i++)
 		 if (strcmp(dslhp[i].getmagv(), magv) == 0) {
-			 o1.open(namefileLhp, ios::trunc);
 			 kt[i] = 0;
-			 j++;
 		 }
 	 for (int i = 1; i <= size_dslhp; i++) {
 		 if (kt[i]) { o1 << dslhp[i]; }
@@ -349,7 +384,6 @@
 			 o2 << "Xoa Lop Hoc Phan " << dslhp[i].getmalophocphan() << " | " << "thoi gian: " << dt;
 		 }
 	 }
-	 size_dslhp -= j;
 	 o1.close();
 	 o2.close();
  }
@@ -422,4 +456,26 @@
  void Admin::XoaHp(const string namefilehp, const string namefilelhp, const string namefilelhp_sv, char* mahp) {
 	 xoaLhp_ByMaHp(namefilelhp, namefilelhp_sv, mahp);
 	 xoafileHpBy_mahp(namefilehp, mahp);
+ }
+ void Admin::reset_mk(const string namefileUser, const string namefilesv, char* mssv) {
+	 SinhVien* dssv = getfromfileSinhVien(namefilesv);
+	 User* dsur = getfromfileUsers(namefileUser);
+	 ofstream o, o1;
+	 o.open(namefileUser, ios::trunc);
+	 o1.open("LichSuThayDoi.txt", ios::app);
+	 for (int i = 1; i <= size_dssv; i++) {
+		 if (strcmp(dssv[i].getMSSV() , mssv) == 0 ) {
+			 o << dssv[i].getMSSV() << endl;
+			 o << dssv[i].getsdt() << endl;
+		 }
+		 else {
+			 o << dsur[i].getMSSV() << endl;
+			 o << dsur[i].getmk() << endl;
+		 }
+	 }
+	 time_t now = time(0);
+	 char* dt = ctime(&now);
+	 o1 << "Reset mat khau cua User co MSSV " << mssv << " | " << "thoi gian: " << dt;
+	 o.close();
+	 o1.close();
  }

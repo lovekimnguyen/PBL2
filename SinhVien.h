@@ -35,11 +35,11 @@ public:
 		sotcdadk = stcddk;
 		sohpdadk = shpddk;
 	}
-	void themLophp_SV(const string namefilelhp_sv,
+	void themLophp_SV(const string namefilelhp_sv, const string namefilelhp,
 		char  malophocphan[16], LopHocPhan* dslophocphan, unsigned int size_dslhp, HocPhan* dshp,
 		unsigned int size_dshp);
-	void xoaLophp_SV(const string namefilelhp_sv, char  malophocphan[16],
-		HocPhan* dshp, LopHocPhan* dslophocphan, ThoiKhoaBieu* ds_TKB, LopHocPhan* dslhpsv_dadk);
+	void xoaLophp_SV(const string namefilelhp_sv, const string namefilelhp, char  malophocphan[16],
+		HocPhan* dshp, LopHocPhan* dslophocphan, ThoiKhoaBieu*& ds_TKB, LopHocPhan*& dslhpsv_dadk);
 	LopHocPhan* getfromfilelhpdadk(const string namefile,
 		LopHocPhan* dslophocphan, unsigned int size_dslhp, HocPhan* dshp, unsigned int size_dshp);
 	ThoiKhoaBieu* getTKB_SVdadk(LopHocPhan* ds_lhp_dadk);

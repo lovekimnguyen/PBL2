@@ -8,7 +8,7 @@ unsigned int size_dsnhom = 0;
 unsigned int size_user = 0;
 unsigned int size_admin = 0;
  User* getfromfileUsers(const string namefile) {
-	 size_user = 0;
+	 size_user = 1;
 	 ifstream in;
 	 in.open(namefile);
 	 User* us = new User[1000];
@@ -419,21 +419,20 @@ Lophp_SV* getfromfileLophp_SV(const string namefile) {
 	 }
 	 return ds_nhom;
  }
- LopHocPhan* getdslhpcuahp(char* mahp, LopHocPhan* dslhp , HocPhan* dshp) {
-	 LopHocPhan* dslhpcuahp = new LopHocPhan[1000];
-	 HocPhan h = getHocPhan(mahp, dshp, size_dshp);
+ LopHocPhan* getdslhpcuahp(char* mahp, LopHocPhan* dslhp , ThoiKhoaBieu *tkb_sv  , unsigned int size_dstkb_sv ) {
+	 LopHocPhan* dslhpcuahp = new LopHocPhan[size_dslhp];
 	 int index = 1;
 	 for (int i = 1; i <= size_dslhp; i++) {
 		 if (strcmp(dslhp[i].getmahocphan(), mahp) == 0) {
 			 dslhpcuahp[index] = dslhp[i]; 
+			 dslhpcuahp[index].setT_after(tkb_sv, size_dstkb_sv);
 			 index++;
 		 }
 	 }
 	 return dslhpcuahp;
  }
- int getsllhpcuahp(char* mahp, LopHocPhan* dslhp, HocPhan* dshp) {
+ int getsllhpcuahp(char* mahp, LopHocPhan* dslhp) {
 	 LopHocPhan* dslhpcuahp = new LopHocPhan[1000];
-	 HocPhan h = getHocPhan(mahp, dshp, size_dshp);
 	 int index = 0;
 	 for (int i = 1; i <= size_dslhp; i++) {
 		 if (strcmp(dslhp[i].getmahocphan(), mahp) == 0) {
@@ -470,12 +469,23 @@ Lophp_SV* getfromfileLophp_SV(const string namefile) {
 		 if (strcmp(dsgv[i].getmagiangvien(), magv) == 0) return dsgv[i];
 	 return dsgv[0];
  }
+ User getUR(const string namefile, char* mssv) {
+	 User* dsur = getfromfileUsers(namefile);
+	 for (int i = 1; i < size_user; i++)
+		 if (strcmp(dsur[i].getMSSV(), mssv) == 0) return dsur[i];
+	 return dsur[0];
+ }
  const char* getGT(bool gioitinh)
  {
 	 char GT[4];
 	 if (gioitinh) return "NAM";
 	 else return "NU"; 
-	// GT[3] = '\0';
-	 //return GT;
  }
- //strcpy_s(GT, 4, "//NAM"); strcpy_s(GT, 3 , "NU");
+ void setfilelhp(const string namefile, LopHocPhan* dslhp) {
+	 ofstream o;
+	 o.open(namefile, ios::trunc);
+	 for (int i = 1; i <= size_dslhp; i++) {
+		 o << dslhp[i];
+	 }
+	 o.close();
+ }

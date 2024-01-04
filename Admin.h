@@ -46,10 +46,12 @@ public:
 	void setmk(char* m) {
 		strcpy_s(mk, strlen(m) + 1, m);
 	}
-	void xoaSV(const string namefileSV, const string namefileLhp_Sv, char* mssv);
+	void reset_mk(const string, const string, char*);
+	void xoaSV(const string namefileSV, const string namefileLhp_Sv, const string namefilelhp, char* mssv);
 	void xoasvBy_mssv_InfileSV(const string filename, char* mssv);
 	void xoafilelhpBy_mlhp(const string filename, char* malhp);
-	void xoaLhpSv_Bixoa_Dadk_Bymssv_infilelhpsv(const string namefile, const string namefileSinhVien, char* mssv);
+	void XoaUser_ByMSSV(const string namefile, char* mssv);
+	void xoaLhpSv_Bixoa_Dadk_Bymssv_infilelhpsv(const string namefile, const string namefileSinhVien, char* mssv, const string namefilelhp);
 	void XoaGv_FromFileGV_ByMaGv(const string namefileGv, char* magv);
 	void xoaLhp_InfileLhp_ByMaGv(const string namefileLhp, char* magv);
 	void XoaGV(const string namefileGV, const string namefileLhp, const string namefileLhpsv, char* magv);

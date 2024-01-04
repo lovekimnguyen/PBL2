@@ -1,12 +1,21 @@
 ﻿#include "Func.h"
 #include "TKB.h" 
 
-void SinhVien::themLophp_SV(const string namefilelhp_sv,
+void SinhVien::themLophp_SV(const string namefilelhp_sv, const string namefilelhp,
 	char  malophocphan[16], LopHocPhan* dslophocphan, unsigned int size_dslhp, HocPhan* dshp,
 	unsigned int size_dshp) {
-	LopHocPhan lhp = getLHP(malophocphan, dslophocphan, size_dslhp);
+	int l;
+	for (unsigned int i = 1; i <= size_dslhp; i++) {
+		if (strcmp(dslophocphan[i].getmalophocphan(), malophocphan) == 0) {
+			l = i; break;
+		}
+	}
+	LopHocPhan lhp = dslophocphan[l];
+
+	int soldadk = lhp.getsoluongdk() + 1;
 	double k = getHocPhan(lhp.getmahocphan(), dshp, size_dshp).gettchi();
-	if (sotcdadk + k < sotcmax) {
+	if (sotcdadk + k < sotcmax && soldadk < lhp.getsoluongmo()) {
+		dslophocphan[l].setsoluongdk(dslophocphan[l].getsoluongdk() + 1);
 		ofstream o1;
 		o1.open(namefilelhp_sv, ios::app);
 		o1 << malophocphan << endl;
@@ -16,19 +25,28 @@ void SinhVien::themLophp_SV(const string namefilelhp_sv,
 		sotcdadk += k;
 		o1.close();
 	}
+	setfilelhp(namefilelhp, dslophocphan);
 }
-void SinhVien::xoaLophp_SV(const string namefilelhp_sv, char  malophocphan[16],
-	HocPhan* dshp, LopHocPhan* dslophocphan, ThoiKhoaBieu* ds_TKB, LopHocPhan* dslhpsv_dadk) {
+void SinhVien::xoaLophp_SV(const string namefilelhp_sv, const string namefilelhp,
+	char  malophocphan[16],
+	HocPhan* dshp, LopHocPhan* dslophocphan, ThoiKhoaBieu*& ds_TKB, LopHocPhan*& dslhpsv_dadk) {
 	if (sotcdadk > 0) {
+		int l;
+		for (unsigned int i = 1; i <= size_dslhp; i++) {
+			if (strcmp(dslophocphan[i].getmalophocphan(), malophocphan) == 0) {
+				l = i; break;
+			}
+		}
+		LopHocPhan lhp = dslophocphan[l];
 		ofstream o1;
 		o1.open(namefilelhp_sv, ios::app);
-		LopHocPhan lhp = getLHP(malophocphan, dslophocphan, size_dslhp);
 		sotcdadk -= getHocPhan(lhp.getmahocphan(), dshp, size_dshp).gettchi();
 		Lophp_SV* dslhp_sv = getfromfileLophp_SV(namefilelhp_sv);
 		for (int i = 1; i <= sohpdadk; i++) {
 			if (strcmp(dslhp_sv[i].getmalophocphan(), malophocphan) == 0
 				&& strcmp(dslhp_sv[i].getMSSV(), MSSV) == 0)
 			{
+				dslophocphan[l].setsoluongdk(dslophocphan[l].getsoluongdk() - 1);
 				Lophp_SV* t = new Lophp_SV[sohpdadk + 3];
 				for (int j = 0; j <= i - 1; j++)
 					t[j] = dslhp_sv[j];
@@ -37,10 +55,12 @@ void SinhVien::xoaLophp_SV(const string namefilelhp_sv, char  malophocphan[16],
 				delete[] dslhp_sv;
 				dslhp_sv = t;
 				sohpdadk--; size_dslhp_sv--;
+				lhp.setsoluongdk(lhp.getsoluongdk() - 1);
 				break;
 			}
 		}
 		setfileLophp_sv(namefilelhp_sv, dslhp_sv);
+		setfilelhp(namefilelhp, dslophocphan);
 		dslhpsv_dadk = getfromfilelhpdadk(namefilelhp_sv, dslophocphan, size_dslhp, dshp, size_dshp);
 		ds_TKB = getTKB_SVdadk(dslhpsv_dadk);
 		o1.close();
